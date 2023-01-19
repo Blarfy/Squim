@@ -17,7 +17,7 @@ public class Row {
     }
 
     public boolean deleteRock(int rock){
-        rocks.remove(rock);
+        rocks.set(rock,false);
         return true;
     }
 

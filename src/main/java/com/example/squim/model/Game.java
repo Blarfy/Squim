@@ -9,13 +9,13 @@ public class Game {
     int CurrentPlayer;
 
     public Game(int id, Player[] players) {
-        this.rows = rows;
+        this.id = id;
         this.players = players;
-
+        setUpBoard();
     }
 
     public void deleteFromRow(int rowIndex, int rockIndex) {
-
+        rows.get(rowIndex).deleteRock(rockIndex);
     }
 
     public void takeTurn() {
@@ -24,5 +24,12 @@ public class Game {
 
     public boolean checkEnd() {
         return false;
+    }
+
+    private void setUpBoard(){
+        rows.add(new Row(1));
+        rows.add(new Row(3));
+        rows.add(new Row(5));
+        rows.add(new Row(7));
     }
 }
