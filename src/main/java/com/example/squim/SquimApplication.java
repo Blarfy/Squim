@@ -13,7 +13,7 @@ public class SquimApplication {
     public static void main(String[] args) {
         SpringApplication.run(SquimApplication.class, args);
 
-        /*
+        /* CPU vs CPU testing
         Player player = new Player();
         ArrayList<Row> board = new ArrayList<>();
         board.add(new Row(1));
@@ -28,7 +28,7 @@ public class SquimApplication {
 
         for (int i = 0; i < 9; i++) {
             System.out.println("Turn " + i);
-            board = player.takeTurn(board);
+            board = player.takeTurn(board, .3f);
             System.out.println("Board: ");
             for (Row row : board) {
                 System.out.println(row.getCount());
