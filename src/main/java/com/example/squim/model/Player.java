@@ -22,25 +22,6 @@ public class Player {
         this.name = name;
     }
 
-    private boolean isHuman;
-    private String name;
-
-    public boolean getIsHuman() {
-        return isHuman;
-    }
-
-    public void setIsHuman(boolean human) {
-        isHuman = human;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public ArrayList<Row> takeTurn(ArrayList<Row> board) {
         boolean oddOnes = false;
         boolean oddTwos = false;
