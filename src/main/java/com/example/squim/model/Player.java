@@ -78,11 +78,11 @@ public class Player {
             boolean randMove = false;
             while(!randMove){
                 int randRow = (int) (Math.random() * board.size());
-                if (board.get(randRow).getCount() >= 1){
+                if (board.get(randRow).getCount() % 2 == 1 || board.get(randRow).getCount() == 2){
                     board.get(randRow).setCount(board.get(randRow).getCount() - 1);
                     System.out.println("Player took 1 from row " + randRow);
                     randMove = true;
-                } else if (board.get(randRow).getCount() >= 2){
+                } else if (board.get(randRow).getCount() > 2){
                     board.get(randRow).setCount(board.get(randRow).getCount() - 2);
                     System.out.println("Player took 2 from row " + randRow);
                     randMove = true;
