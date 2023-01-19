@@ -36,4 +36,5 @@ public class Row {
     public void setRocks(ArrayList<Boolean> rocks) {
         this.rocks = rocks;
     }
+
 }
