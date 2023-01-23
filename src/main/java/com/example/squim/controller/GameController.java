@@ -22,6 +22,8 @@ public class GameController {
         oldGame.setRows(game.getRows());
         oldGame.setPlayers(game.getPlayers());
         oldGame.setCurrentPlayer(game.getCurrentPlayerInt());
+        oldGame.takeTurn();
+
     }
 
     private static void deleteGame(int id){
