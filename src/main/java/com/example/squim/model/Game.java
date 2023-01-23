@@ -1,5 +1,8 @@
 package com.example.squim.model;
 
+import com.example.squim.util.CookieUtil;
+import jakarta.servlet.http.Cookie;
+
 import java.util.ArrayList;
 
 public class Game {
@@ -11,8 +14,8 @@ public class Game {
     public Game() {
     }
 
-    public Game(int id, Player[] players) {
-//        this.rows = rows;
+    public Game(Player[] players) {
+        setUpBoard();
         this.players = players;
 
     }
@@ -40,7 +43,6 @@ public class Game {
         return id;
     }
 
-    //Something tells me this isn't "Best Practices", and you mentioned wanting to be in those habits, so I'll leave it to you to figure out what to do here
     public String getRowsAsJson(){
         StringBuilder sb = new StringBuilder();
         sb.append("{");
@@ -92,6 +94,12 @@ public class Game {
         rows.add(new Row(5));
         rows.add(new Row(7));
     }
+
+    public Cookie getAsCookie() {
+        Cookie gameCookie = CookieUtil.gameToCookie(this);
+        return gameCookie;
+    }
+
 
     public void setRows(ArrayList<Row> rows) {
         this.rows = rows;
