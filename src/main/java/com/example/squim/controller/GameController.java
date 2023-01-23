@@ -12,8 +12,8 @@ public class GameController {
         games = new ArrayList<>();
     }
 
-    public static void createGame(int id, Player[] players){
-        Game game = new Game(id, players);
+    public static void createGame(Player[] players){
+        Game game = new Game(players);
         games.add(game);
     }
 
