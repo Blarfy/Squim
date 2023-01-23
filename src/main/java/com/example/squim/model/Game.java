@@ -9,9 +9,16 @@ public class Game {
     int CurrentPlayer;
 
     public Game(int id, Player[] players) {
-        this.id = id;
+//        this.rows = rows;
         this.players = players;
-        setUpBoard();
+
+    }
+    //update game constructor
+    public Game(int id, ArrayList<Row> rows, Player[] players, int currentPlayer) {
+        this.id = id;
+        this.rows = rows;
+        this.players = players;
+        this.currentPlayer = currentPlayer;
     }
 
     public void deleteFromRow(int rowIndex, int rockIndex) {
@@ -30,6 +37,7 @@ public class Game {
         return id;
     }
 
+    //Something tells me this isn't "Best Practices", and you mentioned wanting to be in those habits, so I'll leave it to you to figure out what to do here
     public String getRowsAsJson(){
         StringBuilder sb = new StringBuilder();
         sb.append("{");
@@ -60,7 +68,7 @@ public class Game {
     }
 
     public Player getCurrentPlayer(){
-        return players[CurrentPlayer];
+        return players[currentPlayer];
     }
 
     private void setUpBoard(){
