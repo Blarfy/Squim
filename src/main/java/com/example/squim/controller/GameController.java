@@ -17,21 +17,25 @@ public class GameController {
         games.add(game);
     }
 
-    public static void updateGame(){
-
+    public static void updateGame(Game game){
+        Game oldGame = findGame(game.getId());
+        oldGame.setRows(game.getRows());
+        oldGame.setPlayers(game.getPlayers());
+        oldGame.setCurrentPlayer(game.getCurrentPlayerInt());
     }
 
-    private static void deleteGame(){
-
+    private static void deleteGame(int id){
+        games.remove(findGame(id));
     }
 
     private static Game findGame(int id){
+        Game game = new Game();
         for (int i = 0; i < games.size(); i++) {
             if(games.get(i).getId()==id){
-                return games.get(i);
+                game = games.get(i);
             }
         }
-        
+        return game;
     }
 
 }

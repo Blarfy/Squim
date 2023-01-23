@@ -6,7 +6,10 @@ public class Game {
     int id;
     ArrayList<Row> rows;
     Player[] players;
-    int CurrentPlayer;
+    int currentPlayer;
+
+    public Game() {
+    }
 
     public Game(int id, Player[] players) {
 //        this.rows = rows;
@@ -71,10 +74,36 @@ public class Game {
         return players[currentPlayer];
     }
 
+    public int getCurrentPlayerInt(){
+        return currentPlayer;
+    }
+
+    public ArrayList<Row> getRows() {
+        return rows;
+    }
+
+    public Player[] getPlayers() {
+        return players;
+    }
+
     private void setUpBoard(){
         rows.add(new Row(1));
         rows.add(new Row(3));
         rows.add(new Row(5));
         rows.add(new Row(7));
     }
+
+    public void setRows(ArrayList<Row> rows) {
+        this.rows = rows;
+    }
+
+    public void setPlayers(Player[] players) {
+        this.players = players;
+    }
+
+    public void setCurrentPlayer(int currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+
 }
