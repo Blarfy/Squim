@@ -1,7 +1,13 @@
 package com.example.squim.util;
 
 import com.example.squim.model.Game;
+import com.example.squim.model.Player;
+import com.example.squim.model.Row;
 import jakarta.servlet.http.Cookie;
+
+import java.util.ArrayList;
+
+import static org.springframework.web.util.WebUtils.getCookie;
 
 public class CookieUtil
 {
@@ -12,4 +18,6 @@ public class CookieUtil
         gameCookie.setAttribute("currentPlayer", game.getCurrentPlayer().getName());
         return gameCookie;
     }
+
+
 }
