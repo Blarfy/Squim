@@ -18,6 +18,17 @@ public class Row {
 
     public boolean deleteRock(int rock){
         rocks.set(rock,false);
+        count--;
+        return true;
+    }
+
+    public boolean aiDeleteRock(int rocks){
+        for(int i = rocks; i > 0; i--){
+            if (this.rocks.get(i)){
+                this.rocks.set(i,false);
+                count--;
+            }
+        }
         return true;
     }
 

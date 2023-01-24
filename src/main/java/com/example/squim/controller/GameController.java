@@ -12,18 +12,20 @@ public class GameController {
         games = new ArrayList<>();
     }
 
-    public static void createGame(Player[] players){
+    public static Game createGame(Player[] players){
         Game game = new Game(players);
         games.add(game);
+        return game;
     }
 
-    public static void updateGame(Game game){
+    public static Game updateGame(Game game){
         Game oldGame = findGame(game.getId());
         oldGame.setRows(game.getRows());
         oldGame.setPlayers(game.getPlayers());
         oldGame.setCurrentPlayer(game.getCurrentPlayerInt());
         oldGame.takeTurn();
 
+        return oldGame;
     }
 
     private static void deleteGame(int id){
@@ -32,9 +34,9 @@ public class GameController {
 
     private static Game findGame(int id){
         Game game = new Game();
-        for (int i = 0; i < games.size(); i++) {
-            if(games.get(i).getId()==id){
-                game = games.get(i);
+        for (Game gameI : games) {
+            if (gameI.getId() == id) {
+                game = gameI;
             }
         }
         return game;
