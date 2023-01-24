@@ -11,6 +11,8 @@ public class Game {
     Player[] players;
     int currentPlayer;
 
+    Difficulty difficulty = Difficulty.NORMAL;
+
     public Game() {
     }
 
@@ -20,11 +22,12 @@ public class Game {
 
     }
     //update game constructor
-    public Game(int id, ArrayList<Row> rows, Player[] players, int currentPlayer) {
+    public Game(int id, ArrayList<Row> rows, Player[] players, int currentPlayer, Difficulty difficulty) {
         this.id = id;
         this.rows = rows;
         this.players = players;
         this.currentPlayer = currentPlayer;
+        this.difficulty = difficulty;
     }
 
     public void deleteFromRow(int rowIndex, int rockIndex) {
@@ -32,11 +35,109 @@ public class Game {
     }
 
     public void takeTurn() {
+        //if ai is playing, do aiTurn
 
+        float failChance = .3f;
+        switch (difficulty) {
+            case EASY:
+                failChance = .5f;
+                break;
+            case NORMAL:
+                failChance = .3f;
+                break;
+            case HARD:
+                failChance = .1f;
+                break;
+        }
+
+        if(!players[currentPlayer].getIsHuman()){
+            aiTurn(failChance);
+        }
+
+        //change whose turn it is
+        if (currentPlayer == 0) {
+            currentPlayer = 1;
+        } else {
+            currentPlayer = 0;
+        }
+    }
+
+    public void aiTurn(float failChance) {
+        boolean oddOnes = false;
+        boolean oddTwos = false;
+        boolean oddFours = false;
+
+        //get random number between 0 and 1 and compare with failchance
+        if (Math.random() < failChance) {
+            for (Row row : rows) {
+                int tempCount = row.getCount();
+                if (row.getCount() % 2 == 1) {
+                    oddOnes = !oddOnes;
+                    tempCount--;
+                }
+                while (tempCount >= 4) {
+                    oddFours = !oddFours;
+                    tempCount -= 4;
+                }
+                while (tempCount >= 2) {
+                    oddTwos = !oddTwos;
+                    tempCount -= 2;
+                }
+            }
+        } else System.out.println("Failed to calculate odds!");
+
+        if (oddOnes) {
+            for (Row row : rows) {
+                if (row.getCount() >= 1){
+                    // take one
+                    row.aiDeleteRock(1);
+                    System.out.println("Player took 1 from row " + rows.indexOf(row));
+                    break;
+                }
+            }
+        } else if (oddTwos) {
+            for (Row row : rows) {
+                if (row.getCount() >= 2){
+                    // take two
+                    row.aiDeleteRock(2);
+                    System.out.println("Player took 2 from row " + rows.indexOf(row));
+                    break;
+                }
+            }
+        } else if (oddFours) {
+            for (Row row : rows) {
+                if (row.getCount() >= 4){
+                    // take two
+                    row.aiDeleteRock(2);
+                    System.out.println("Player took 4 from row " + rows.indexOf(row));
+                    break;
+                }
+            }
+        } else {
+            boolean randMove = false;
+            while(!randMove){
+                int randRow = (int) (Math.random() * rows.size());
+                if (rows.get(randRow).getCount() % 2 == 1 || rows.get(randRow).getCount() == 2){
+                    rows.get(randRow).aiDeleteRock(1);
+                    System.out.println("Player took 1 from row " + randRow);
+                    randMove = true;
+                } else if (rows.get(randRow).getCount() > 2){
+                    rows.get(randRow).aiDeleteRock(2);
+                    System.out.println("Player took 2 from row " + randRow);
+                    randMove = true;
+                }
+            }
+        }
     }
 
     public boolean checkEnd() {
-        return false;
+        boolean end = true;
+        for (Row row : rows) {
+            if (row.getCount() != 0) {
+                end = false;
+            }
+        }
+        return end;
     }
 
     public int getId(){
