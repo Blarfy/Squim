@@ -67,64 +67,112 @@ public class Game {
         boolean oddTwos = false;
         boolean oddFours = false;
 
-        //get random number between 0 and 1 and compare with failchance
-        if (Math.random() < failChance) {
-            for (Row row : rows) {
-                int tempCount = row.getCount();
-                if (row.getCount() % 2 == 1) {
-                    oddOnes = !oddOnes;
-                    tempCount--;
-                }
-                while (tempCount >= 4) {
-                    oddFours = !oddFours;
-                    tempCount -= 4;
-                }
-                while (tempCount >= 2) {
-                    oddTwos = !oddTwos;
-                    tempCount -= 2;
-                }
-            }
-        } else System.out.println("Failed to calculate odds!");
+        //check if total rocks is lower than 5
+        int totalRocks = 0;
+        for (Row row : rows) {
+            totalRocks += row.getCount();
+        }
 
-        if (oddOnes) {
-            for (Row row : rows) {
-                if (row.getCount() >= 1){
-                    // take one
-                    row.aiDeleteRock(1);
-                    System.out.println("Player took 1 from row " + rows.indexOf(row));
-                    break;
+        //maybe put failchance here as well if endgame is too difficult for user
+        if(totalRocks > 5) {
+
+            //get random number between 0 and 1 and compare with failchance
+            if (Math.random() < failChance) {
+                for (Row row : rows) {
+                    int tempCount = row.getCount();
+                    if (row.getCount() % 2 == 1) {
+                        oddOnes = !oddOnes;
+                        tempCount--;
+                    }
+                    while (tempCount >= 4) {
+                        oddFours = !oddFours;
+                        tempCount -= 4;
+                    }
+                    while (tempCount >= 2) {
+                        oddTwos = !oddTwos;
+                        tempCount -= 2;
+                    }
                 }
-            }
-        } else if (oddTwos) {
-            for (Row row : rows) {
-                if (row.getCount() >= 2){
-                    // take two
-                    row.aiDeleteRock(2);
-                    System.out.println("Player took 2 from row " + rows.indexOf(row));
-                    break;
+            } else System.out.println("Failed to calculate odds!");
+
+            if (oddOnes) {
+                for (Row row : rows) {
+                    if (row.getCount() >= 1) {
+                        // take one
+                        row.aiDeleteRock(1);
+                        System.out.println("Player took 1 from row " + rows.indexOf(row));
+                        break;
+                    }
                 }
-            }
-        } else if (oddFours) {
-            for (Row row : rows) {
-                if (row.getCount() >= 4){
-                    // take two
-                    row.aiDeleteRock(2);
-                    System.out.println("Player took 4 from row " + rows.indexOf(row));
-                    break;
+            } else if (oddTwos) {
+                for (Row row : rows) {
+                    if (row.getCount() >= 2) {
+                        // take two
+                        row.aiDeleteRock(2);
+                        System.out.println("Player took 2 from row " + rows.indexOf(row));
+                        break;
+                    }
+                }
+            } else if (oddFours) {
+                for (Row row : rows) {
+                    if (row.getCount() >= 4) {
+                        // take two
+                        row.aiDeleteRock(2);
+                        System.out.println("Player took 4 from row " + rows.indexOf(row));
+                        break;
+                    }
+                }
+            } else {
+                boolean randMove = false;
+                while (!randMove) {
+                    int randRow = (int) (Math.random() * rows.size());
+                    if (rows.get(randRow).getCount() % 2 == 1 || rows.get(randRow).getCount() == 2) {
+                        rows.get(randRow).aiDeleteRock(1);
+                        System.out.println("Player took 1 from row " + randRow);
+                        randMove = true;
+                    } else if (rows.get(randRow).getCount() > 2) {
+                        rows.get(randRow).aiDeleteRock(2);
+                        System.out.println("Player took 2 from row " + randRow);
+                        randMove = true;
+                    }
                 }
             }
         } else {
-            boolean randMove = false;
-            while(!randMove){
-                int randRow = (int) (Math.random() * rows.size());
-                if (rows.get(randRow).getCount() % 2 == 1 || rows.get(randRow).getCount() == 2){
-                    rows.get(randRow).aiDeleteRock(1);
-                    System.out.println("Player took 1 from row " + randRow);
-                    randMove = true;
-                } else if (rows.get(randRow).getCount() > 2){
-                    rows.get(randRow).aiDeleteRock(2);
-                    System.out.println("Player took 2 from row " + randRow);
-                    randMove = true;
+            //if total rocks is less than 5, try to make other player take the last rock
+            int movesleft = 0;
+            for (Row row : rows) {
+                movesleft += row.getCount() / 2;
+                if(row.getCount() % 2 == 1) movesleft++;
+            }
+            if(movesleft % 2 == 1){
+                //take one move
+                for (Row row : rows) {
+                    if (row.getCount() % 2 == 1) {
+                        // take one
+                        row.aiDeleteRock(1);
+                        System.out.println("Player took 1 from row " + rows.indexOf(row));
+                        break;
+                    } else if (row.getCount() >= 2) {
+                        // take two
+                        row.aiDeleteRock(2);
+                        System.out.println("Player took 2 from row " + rows.indexOf(row));
+                        break;
+                    }
+                }
+            } else {
+                //take half a move
+                for (Row row : rows) {
+                    if (row.getCount() >= 2) {
+                        // take one
+                        row.aiDeleteRock(1);
+                        System.out.println("Player took 2 from row " + rows.indexOf(row));
+                        break;
+                    } else if (row.getCount() == 1) {
+                        // if it cannot be helped, accept defeat
+                        row.aiDeleteRock(1);
+                        System.out.println("Player took 1 from row " + rows.indexOf(row));
+                        break;
+                    }
                 }
             }
         }
