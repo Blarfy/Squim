@@ -12,11 +12,12 @@ import static org.springframework.web.util.WebUtils.getCookie;
 public class CookieUtil
 {
     public static Cookie gameToCookie(Game game){
-        Cookie gameCookie = new Cookie("id", game.getId() + ""); //FIX this, we shouldn't be casting a string by adding an empty string, this is far from "Best Practices"
-        gameCookie.setAttribute("rows", game.getRowsAsJson());
-        gameCookie.setAttribute("players", game.getPlayersAsJson());
-        gameCookie.setAttribute("currentPlayer", game.getCurrentPlayer().getName());
-        gameCookie.setAttribute("Difficulty",game.getDifficulty().toString());
+        Cookie gameCookie = new Cookie("id", game.getId() + ""); //find a better way and implement it yourself if you want it fixed Alex. this works just fine
+//        gameCookie.setAttribute("rows", game.getRowsAsJson());
+//        gameCookie.setAttribute("players", game.getPlayersAsJson());
+//        gameCookie.setAttribute("currentPlayer", game.getCurrentPlayer().getName());
+//        gameCookie.setAttribute("Difficulty",game.getDifficulty().toString());
+        gameCookie.setMaxAge(1000000);
         return gameCookie;
     }
 
