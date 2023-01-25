@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Squim</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script1.js" defer></script>
+    <script src="script2.js" defer></script>
+</head>
+<body>
+    <header class="flexNav">
+        <div class="spacer"></div>
+        <a href="index.html">Squim</a>
+        <div class="helpButton" onclick="popupFunction()">
+            Help
+        </div>
+    </header>
+    <div class="headerBuffer"></div>
+    <div class="flexBox">
+        <div class="optionBox">
+            <div class="niceButton" id="pvp">
+                PVP
+            </div>
+            <div class="stack">
+                <div class="niceButton" id="ez">
+                    Easy
+                </div>
+                <div class="niceButton" id="meaty">
+                    Medium
+                </div>
+                <div class="niceButton" id="hardDK">
+                    Hard
+                </div>
+            </div>
+        </div>
+
+        <div class="nameBar">
+            <span>Player 1 name: </span>
+            <input type="text" name="player1" id="player1">
+            <div id="player2NameBox">
+                <span>Player 2 name: </span>
+                <input type="text" name="player2" id="player2">
+            </div>
+            
+        </div>
+        
+        <div class="playButton">
+            <a href="game.html">
+                Play Now
+            </a>
+        </div>
+    </div>
+</body>
+</html>

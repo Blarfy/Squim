@@ -132,6 +132,14 @@ header {
     flex-direction: row;
 }
 
+.flexNav a {
+    text-decoration: none;
+    color: white;
+    font-size: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: 0.2s;
+}
+
 .spacer {
     margin-left: 120px;
 }
@@ -171,4 +179,81 @@ header {
 
 .row img {
     padding: 10px;
+}
+
+/* ------------------------------------------ */
+
+.Dwayne img {
+    width:75px;
+    height: 75px;
+}
+
+.endTurnButton {
+    margin-top: 20px;
+    width: 150px;
+    border-radius: 10px;
+    background-color: #4545FF;
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5rem;
+    text-align: center;
+    transition: 0.2s;
+    color: black;
+    text-decoration: none;
+}
+
+.endTurnButton:hover {
+    background-color: #2d19c6;
+    cursor: pointer;
+    color: white;
+}
+
+.optionBox {
+    margin-top: 20px;
+    width: 450px;
+    border-radius: 15px;
+    background-color: #4545FF;
+    border: 5px solid #2d19c6;
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5rem;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.niceButton {
+    width: 100px;
+    border-radius: 5px;
+    background-color: #4593ff;
+    padding: 10px;
+    margin: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5rem;
+    text-align: center;
+    transition: 0.2s;
+    color: white;
+    text-decoration: none;
+}
+
+.niceButton:hover {
+    cursor: pointer;
+}
+
+.nameBar {
+    border-radius: 15px;
+    background-color: #4545FF;
+    border: 5px solid #2d19c6;
+    padding: 10px;
+    color: white;
+    width: 800px;
+    height: 100px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+input {
+    margin-top: 15px;
+    width: 80%;
 }
