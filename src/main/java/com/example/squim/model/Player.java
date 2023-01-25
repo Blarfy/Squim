@@ -3,7 +3,7 @@ package com.example.squim.model;
 import java.util.ArrayList;
 
 public class Player {
-    private boolean isHuman;
+    private Boolean isHuman;
     private String name;
 
     public boolean getIsHuman() {
