@@ -9,7 +9,7 @@ let gameArea = document.getElementById("gameArea");
 let players = [];
 let difficulty;
 let isPVP;
-let failChance;
+let failChance = .3;
 const startGame = () => {
     gameBoard = [
                     [true],
@@ -135,12 +135,15 @@ const aiTurn = () => {
     for (let index = 0; index < gameBoard.length; index++) {
         totalRocks += getCount(index);
     }
-
+    console.log("totalRocks:" + totalRocks);
     //maybe put failchance here as well if endgame is too difficult for user
-    if(totalRocks > 5) {
+    if(totalRocks > 8) {
 
         //get random number between 0 and 1 and compare with failchance
-        if (Math.random() > failChance) {
+        let random = Math.random();
+        console.log(random);
+        console.log(failChance);
+        if (random > failChance) {
             for (let index = 0; index < gameBoard.length; index++) {
                 var tempCount = getCount(index);
                 if (getCount(index) % 2 == 1) {
@@ -204,6 +207,13 @@ const aiTurn = () => {
         }
     } else {
         for (let index = 0; index < gameBoard.length; index++) {
+            if (totalRocks == 2) {
+                if (getCount(index) == 2) {
+                    aiDeleteRock(index, 1);
+                    console.log("Player took 1 from row " + index);
+                    break;
+                }
+            }
             if (getCount(index) >= 2) {
                 // take two
                 aiDeleteRock(index, 2);

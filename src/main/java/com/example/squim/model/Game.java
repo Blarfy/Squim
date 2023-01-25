@@ -84,7 +84,7 @@ public class Game {
         if(totalRocks > 5) {
 
             //get random number between 0 and 1 and compare with failchance
-            if (Math.random() < failChance) {
+            if (Math.random() > failChance) {
                 for (Row row : rows) {
                     int tempCount = row.getCount();
                     if (row.getCount() % 2 == 1) {
