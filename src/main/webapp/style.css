@@ -229,6 +229,7 @@ header {
     color: black;
     text-decoration: none;
     user-select: none;
+    display: none;
 }
 
 .endTurnButton:hover {
@@ -292,3 +293,28 @@ input {
     display: none;
 }
 
+
+#playButton {
+    display: none;
+}
+
+#playAgain {
+    width: 150px;
+    user-select: none;
+}
+
+#playAgain:hover {
+    cursor: pointer;
+    background-color: #2d19c6;
+}
+
+#playAgain a {
+    text-decoration: none;
+    color: white;;
+}
+
+.gameArea h1 {
+    font-size: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}

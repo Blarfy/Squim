@@ -20,9 +20,9 @@
     <div class="headerBuffer"></div>
     <div class="flexBox">
         <div class="turnHeader">
-            <h1>PLAYER's turn</h1>
+            <h1 id="playerHeader">PLAYER's turn</h1>
         </div>
-        <div class="gameArea">
+        <div class="gameArea" id="gameArea">
             <div class="row" id="r1">
                 
             </div>
@@ -37,7 +37,7 @@
             </div>
             <!-- Should start hidden-->
         </div>
-        <div class="endTurnButton" onclick="endTurn()">
+        <div class="endTurnButton" id="endTurnButton" onclick="endTurn()">
             End Turn
         </div>
     </div>
