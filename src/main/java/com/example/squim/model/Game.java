@@ -1,6 +1,7 @@
 package com.example.squim.model;
 
 import com.example.squim.util.CookieUtil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.Cookie;
@@ -10,6 +11,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Game {
+    //this annotation is used to prevent the id from being sent to the client. It should only be stored in a cookie
+    @JsonIgnore
     int id;
     ArrayList<Row> rows;
     Player[] players;
@@ -63,6 +66,7 @@ public class Game {
         } else {
             currentPlayer = 0;
         }
+        checkEnd();
     }
 
     public void aiTurn(float failChance) {

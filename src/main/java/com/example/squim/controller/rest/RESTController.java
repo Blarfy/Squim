@@ -19,7 +19,7 @@ public class RESTController {
     Logger logger = org.slf4j.LoggerFactory.getLogger(RESTController.class);
 
     @GetMapping("/createGame")
-    public String createGame(@RequestBody Player[] players, HttpServletResponse response) {
+    public Game createGame(@RequestBody Player[] players, HttpServletResponse response) {
         /*
          * Players should be sent in this format:
          * {
@@ -39,27 +39,28 @@ public class RESTController {
         Game game = GameController.createGame(players);
         Cookie gameCookie = game.getAsCookie();
         response.addCookie(gameCookie);
-        return "Game created";
+        return game;
     }
 
     @GetMapping("/updateGame")
-    public String updateGame(HttpServletRequest request, HttpServletResponse response) {
+    //Just to be sure that the game is updated, the game is sent back as a Game object
+    public Game updateGame( @RequestBody Game game,HttpServletRequest request, HttpServletResponse response) {
         Cookie[] cookies = request.getCookies();
         logger.info("Cookies: " + cookies);
         for (int i = 0; i < cookies.length; i++) {
-            if(cookies[i].getAttributes().containsKey("rows")){
-                Game game = new Game();
-                Difficulty.valueOf("Easy");
-                game = new Game(Integer.parseInt(cookies[i].getAttribute("id")),game.convertJsonToRows(cookies[i].getAttribute("rows"))
-                        ,Integer.parseInt(cookies[i].getAttribute("currentPlayer")), Difficulty.valueOf(cookies[i].getAttribute("Difficulty")));
-                GameController.updateGame(game);
+            if(cookies[i].getAttributes().containsKey("id")){
+                game.setId(Integer.parseInt(cookies[i].getAttribute("id")));
+                Game updated = GameController.updateGame(game);
+                return updated;
             }
         }
-        return "Game updated";
+        //If no cookie is found, return a 404
+        response.setStatus(404);
+        return null;
     }
 
-    @GetMapping("/getGame/{id}")
-    public Game getGame(@PathVariable int id) {
+    @GetMapping("/getGame")
+    public Game getGame(@CookieValue("id") int id) {
         return GameController.findGame(id);
     }
 }
