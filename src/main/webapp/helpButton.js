@@ -2,7 +2,7 @@ let popupFunction = () => {
     // Useful GitHub Copilot suggestion
     // let popup = document.getElementById("popup");
     // popup.classList.toggle("show");
-    alert("Hello World! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam enim eos dolor iusto, in minus quasi consectetur qui nobis voluptatum necessitatibus saepe. In eligendi, cumque eaque maiores molestiae quod deleniti? This will be replaced with a real in-page popup");
+    alert("Players take turns removing objects from the piles. On each turn, a player must remove at least one object, and may remove any number of objects provided they all come from the same pile. The goal of the game is to be the player to remove the last object. The player who removes the last object loses the game. Players should strategize and plan their moves in order to force their opponent to take the last object.");
 }
 
 function getRandomInt(min, max) {
