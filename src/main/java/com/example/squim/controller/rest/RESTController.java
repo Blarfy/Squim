@@ -10,6 +10,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+
 @RestController
 @RequestMapping("/game")
 public class RESTController {
@@ -17,7 +19,7 @@ public class RESTController {
     Logger logger = org.slf4j.LoggerFactory.getLogger(RESTController.class);
 
     @GetMapping("/createGame")
-    public String createGame(@RequestBody Player[] playerNames, HttpServletResponse response) {
+    public String createGame(@RequestBody Player[] players, HttpServletResponse response) {
         /*
          * Players should be sent in this format:
          * {
@@ -33,7 +35,8 @@ public class RESTController {
          * ]
          * }
          */
-        Game game = GameController.createGame(playerNames);
+        Arrays.stream(players).forEach(player ->  logger.info(player.getName()));
+        Game game = GameController.createGame(players);
         Cookie gameCookie = game.getAsCookie();
         response.addCookie(gameCookie);
         return "Game created";
@@ -53,5 +56,10 @@ public class RESTController {
             }
         }
         return "Game updated";
+    }
+
+    @GetMapping("/getGame/{id}")
+    public Game getGame(@PathVariable int id) {
+        return GameController.findGame(id);
     }
 }

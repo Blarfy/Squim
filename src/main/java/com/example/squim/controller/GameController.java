@@ -6,7 +6,7 @@ import com.example.squim.model.Player;
 import java.util.ArrayList;
 
 public class GameController {
-    private static ArrayList<Game> games;
+    private static ArrayList<Game> games = new ArrayList<>();
 
     public GameController() {
         games = new ArrayList<>();
@@ -15,6 +15,7 @@ public class GameController {
     public static Game createGame(Player[] players){
         Game game = new Game(players);
         games.add(game);
+        game.setId(games.indexOf(game));
         return game;
     }
 
@@ -31,7 +32,7 @@ public class GameController {
         games.remove(findGame(id));
     }
 
-    private static Game findGame(int id){
+    public static Game findGame(int id){
         Game game = new Game();
         for (Game gameI : games) {
             if (gameI.getId() == id) {
