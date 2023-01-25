@@ -6,6 +6,7 @@ const meat = document.getElementById("meaty");
 let meatyPressed = false;
 const hardDK = document.getElementById("hardDK");
 let hardDKPressed = false;
+const player2NameBox = document.getElementById("player2NameBox");
 
 //onclick for pvp button
 pvpButton.onclick = () => {
@@ -18,6 +19,7 @@ pvpButton.onclick = () => {
         meat.style.backgroundColor = "#4593ff";
         hardDKPressed = false;
         hardDK.style.backgroundColor = "#4593ff";
+        player2NameBox.style.display = "block";
     } else {
         pvpButton.style.backgroundColor = "#4593ff";
     }
@@ -34,6 +36,7 @@ easyModo.onclick = () => {
         hardDK.style.backgroundColor = "#4593ff";
         pvpButtonPressed = false;
         pvpButton.style.backgroundColor = "#4593ff";
+        player2NameBox.style.display = "none";
     } else {
         easyModo.style.backgroundColor = "#4593ff";
     }
@@ -50,6 +53,7 @@ meat.onclick = () => {
         hardDK.style.backgroundColor = "#4593ff";
         pvpButtonPressed = false;
         pvpButton.style.backgroundColor = "#4593ff";
+        player2NameBox.style.display = "none";
     } else {
         meat.style.backgroundColor = "#4593ff";
     }
@@ -66,30 +70,21 @@ hardDK.onclick = () => {
         meat.style.backgroundColor = "#4593ff";
         pvpButtonPressed = false;
         pvpButton.style.backgroundColor = "#4593ff";
+        player2NameBox.style.display = "none";
     } else {
         hardDK.style.backgroundColor = "#4593ff";
     }
 }
 
+const player1Name = document.getElementById("player1");
+let player1NameValue = player1Name.value;
+const player2Name = document.getElementById("player2");
+let player2NameValue = player2Name.value;
 
+player1Name.onkeyup = () => {
+    player1NameValue = player1Name.value;
+}
 
-
-
-
-// const popupFunction = () => {
-//     // Useful GitHub Copilot suggestion
-//     // let popup = document.getElementById("popup");
-//     // popup.classList.toggle("show");
-//     alert("Hello World! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam enim eos dolor iusto, in minus quasi consectetur qui nobis voluptatum necessitatibus saepe. In eligendi, cumque eaque maiores molestiae quod deleniti? This will be replaced with a real in-page popup");
-// }
-
-// //unfinished
-// const updateGame = async () => {
-//     const response = await fetch("http://127.0.0.1:8080/updateGame", {
-//         method: "PUT",
-//         headers: {
-//             "Content-Type": "cookie???"
-//         },
-//         body: document.cookie// GAME COOKIE
-//     });
-// }
+player2Name.onkeyup = () => {
+    player2NameValue = player2Name.value;
+}
