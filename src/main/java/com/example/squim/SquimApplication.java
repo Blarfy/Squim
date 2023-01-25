@@ -1,10 +1,12 @@
 package com.example.squim;
 
+import com.example.squim.model.Game;
 import com.example.squim.model.Player;
 import com.example.squim.model.Row;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.io.Console;
 import java.util.ArrayList;
 
 @SpringBootApplication
@@ -35,5 +37,18 @@ public class SquimApplication {
             }
         }
         */
+
+
+        Player player = new Player();
+        player.setIsHuman(true);
+        player.setName("Elliot");
+        Player player2 = new Player();
+        player2.setIsHuman(true);
+        player2.setName("Ashton");
+        Player players[] = new Player[]{player,player2};
+        Game game = new Game(players);
+        System.out.println(game.getPlayersAsJson());
+
+
     }
 }

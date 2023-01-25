@@ -1,6 +1,7 @@
 package com.example.squim.controller.rest;
 
 import com.example.squim.controller.GameController;
+import com.example.squim.model.Difficulty;
 import com.example.squim.model.Game;
 import com.example.squim.model.Player;
 import jakarta.servlet.http.Cookie;
@@ -42,6 +43,15 @@ public class RESTController {
     public String updateGame(HttpServletRequest request, HttpServletResponse response) {
         Cookie[] cookies = request.getCookies();
         logger.info("Cookies: " + cookies);
+        for (int i = 0; i < cookies.length; i++) {
+            if(cookies[i].getAttributes().containsKey("rows")){
+                Game game = new Game();
+                Difficulty.valueOf("Easy");
+                game = new Game(Integer.parseInt(cookies[i].getAttribute("id")),game.convertJsonToRows(cookies[i].getAttribute("rows"))
+                        ,Integer.parseInt(cookies[i].getAttribute("currentPlayer")), Difficulty.valueOf(cookies[i].getAttribute("Difficulty")));
+                GameController.updateGame(game);
+            }
+        }
         return "Game updated";
     }
 }
