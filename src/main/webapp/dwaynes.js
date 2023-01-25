@@ -28,7 +28,8 @@ const startGame = () => {
     players[0] = localStorage.getItem("player1Name");
     players[1] = localStorage.getItem("player2Name");
     isPVP = localStorage.getItem("pvp");
-    difficulty = localStorage.getItem("difficulty");
+    difficulty = parseInt(localStorage.getItem("difficulty"));
+    console.log(difficulty)
     switch (difficulty) {
         case 1:
             failChance = .5;
@@ -40,6 +41,7 @@ const startGame = () => {
             failChance = .1;
             break;
     }
+    console.log(failChance);
     playerHeader.innerHTML = players[0] + "'s Turn";
 }
 
@@ -138,7 +140,7 @@ const aiTurn = () => {
     if(totalRocks > 5) {
 
         //get random number between 0 and 1 and compare with failchance
-        if (Math.random() < failChance) {
+        if (Math.random() > failChance) {
             for (let index = 0; index < gameBoard.length; index++) {
                 var tempCount = getCount(index);
                 if (getCount(index) % 2 == 1) {
@@ -203,8 +205,8 @@ const aiTurn = () => {
     } else {
         for (let index = 0; index < gameBoard.length; index++) {
             if (getCount(index) >= 2) {
-                // take one
-                aiDeleteRock(index, 1);
+                // take two
+                aiDeleteRock(index, 2);
                 console.log("Player took 2 from row " + index);
                 break;
             } else if (getCount(index) == 1) {
