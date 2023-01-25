@@ -43,16 +43,14 @@ public class RESTController {
     }
 
     @GetMapping("/updateGame")
-    public String updateGame(HttpServletRequest request, HttpServletResponse response) {
+    public String updateGame( @RequestBody Game game,HttpServletRequest request, HttpServletResponse response) {
         Cookie[] cookies = request.getCookies();
         logger.info("Cookies: " + cookies);
         for (int i = 0; i < cookies.length; i++) {
-            if(cookies[i].getAttributes().containsKey("rows")){
-                Game game = new Game();
-                Difficulty.valueOf("Easy");
-                game = new Game(Integer.parseInt(cookies[i].getAttribute("id")),game.convertJsonToRows(cookies[i].getAttribute("rows"))
-                        ,Integer.parseInt(cookies[i].getAttribute("currentPlayer")), Difficulty.valueOf(cookies[i].getAttribute("Difficulty")));
+            if(cookies[i].getAttributes().containsKey("id")){
+                game.setId(Integer.parseInt(cookies[i].getAttribute("id")));
                 GameController.updateGame(game);
+                return "Game updated";
             }
         }
         return "Game updated";

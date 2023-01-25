@@ -63,6 +63,7 @@ public class Game {
         } else {
             currentPlayer = 0;
         }
+        checkEnd();
     }
 
     public void aiTurn(float failChance) {
