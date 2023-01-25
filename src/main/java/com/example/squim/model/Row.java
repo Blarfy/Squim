@@ -3,7 +3,7 @@ package com.example.squim.model;
 import java.util.ArrayList;
 
 public class Row {
-    private int count;
+    private Integer count;
     private ArrayList<Boolean> rocks;
 
     public Row(int count) {

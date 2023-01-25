@@ -13,10 +13,10 @@ import java.util.regex.Pattern;
 public class Game {
     //this annotation is used to prevent the id from being sent to the client. It should only be stored in a cookie
     @JsonIgnore
-    int id;
+    Integer id;
     ArrayList<Row> rows;
     Player[] players;
-    int currentPlayer;
+    Integer currentPlayer;
 
     Difficulty difficulty = Difficulty.NORMAL;
 
