@@ -1,9 +1,13 @@
 package com.example.squim.model;
 
 import com.example.squim.util.CookieUtil;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.Cookie;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Game {
     int id;
@@ -19,10 +23,9 @@ public class Game {
     public Game(Player[] players) {
         setUpBoard();
         this.players = players;
-
     }
     //update game constructor
-    public Game(int id, ArrayList<Row> rows, Player[] players, int currentPlayer, Difficulty difficulty) {
+    public Game(int id, ArrayList<Row> rows, int currentPlayer, Difficulty difficulty) {
         this.id = id;
         this.rows = rows;
         this.players = players;
@@ -209,6 +212,44 @@ public class Game {
         return sb.toString();
     }
 
+    public ArrayList<Row> convertJsonToRows (String json){
+        Pattern p = Pattern.compile("([a-z]{4,})");
+        Matcher m = p.matcher(json);
+        ArrayList<Row> rows = new ArrayList<>();
+        Row row1 = new Row(1);
+        m.find();
+        if(m.group().equals("false")){
+            row1.deleteRock(0);
+        }
+        Row row2 = new Row(3);
+        for (int i = 0; i < row2.getCount(); i++) {
+            m.find();
+            if(m.group().equals("false")){
+                row2.deleteRock(i);
+            }
+        }
+        Row row3 = new Row(5);
+        for (int i = 0; i < row3.getCount(); i++) {
+            m.find();
+            if(m.group().equals("false")){
+                row3.deleteRock(i);
+            }
+        }
+        Row row4 = new Row(7);
+        for (int i = 0; i < row3.getCount(); i++) {
+            m.find();
+            if(m.group().equals("false")){
+                row4.deleteRock(i);
+            }
+        }
+        rows.add(row1);
+        rows.add(row2);
+        rows.add(row3);
+        rows.add(row4);
+        return rows;
+    }
+
+
     public String getPlayersAsJson(){
         StringBuilder sb = new StringBuilder();
         sb.append("{");
@@ -238,6 +279,7 @@ public class Game {
     }
 
     private void setUpBoard(){
+        rows = new ArrayList<>();
         rows.add(new Row(1));
         rows.add(new Row(3));
         rows.add(new Row(5));
@@ -262,5 +304,15 @@ public class Game {
         this.currentPlayer = currentPlayer;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
 }

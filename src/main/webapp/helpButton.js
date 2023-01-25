@@ -1,4 +1,4 @@
-const popupFunction = () => {
+let popupFunction = () => {
     // Useful GitHub Copilot suggestion
     // let popup = document.getElementById("popup");
     // popup.classList.toggle("show");

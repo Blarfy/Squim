@@ -21,8 +21,9 @@ public class GameController {
     public static Game updateGame(Game game){
         Game oldGame = findGame(game.getId());
         oldGame.setRows(game.getRows());
-        oldGame.setPlayers(game.getPlayers());
         oldGame.setCurrentPlayer(game.getCurrentPlayerInt());
+        oldGame.takeTurn();
+
         return oldGame;
     }
 

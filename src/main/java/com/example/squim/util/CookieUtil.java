@@ -16,6 +16,7 @@ public class CookieUtil
         gameCookie.setAttribute("rows", game.getRowsAsJson());
         gameCookie.setAttribute("players", game.getPlayersAsJson());
         gameCookie.setAttribute("currentPlayer", game.getCurrentPlayer().getName());
+        gameCookie.setAttribute("Difficulty",game.getDifficulty().toString());
         return gameCookie;
     }
 
