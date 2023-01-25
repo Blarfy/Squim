@@ -122,7 +122,7 @@ window.onload = () => {
 
 
 
-const aiTurn = (failChance) => {
+const aiTurn = () => {
     let oddOnes = false;
     let oddTwos = false;
     let oddFours = false;
